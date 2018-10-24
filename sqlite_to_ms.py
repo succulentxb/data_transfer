@@ -2,6 +2,8 @@ import pymysql as pm
 import sqlite3 as sqli 
 import db_tools as dt 
 
+dt.clear_db()
+dt.create_table()
 
 ms_db = dt.connection()
 ms_cursor = ms_db.cursor()
@@ -46,3 +48,6 @@ for data in data_list:
     except:
         ms_db.rollback()
 print('copy done.')
+
+ms_db.close()
+sqli_db.close()
