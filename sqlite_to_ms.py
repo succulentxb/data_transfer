@@ -1,17 +1,17 @@
 import pymysql as pm 
 import sqlite3 as sqli 
-import configparser
+import db_tools as dt 
 
-print('config file loading...')
-conf = configparser.ConfigParser()
-conf.read('db.conf')
-ms_user = conf['mysql_db']['user']
-ms_passw = conf['mysql_db']['password']
-ms_host = conf['mysql_db']['host']
-ms_db = conf['mysql_db']['db']
-sqli_db = conf['sqlite_db']['db']
-print('config file loaded')
 
-ms_db = pm.connect(ms_host, ms_user, ms_passw, ms_db)
+ms_db = dt.connection()
 ms_cursor = ms_db.cursor()
 
+sqli_db = sqli.connect('database.db')
+sqli_cursor = sqli_db.cursor()
+
+# copy data in table room
+sqli_cursor.execute('select * from room;')
+data_list = sqli_cursor.fetchall()
+# print(data)
+for data in data_list:
+    query = 'INSERT INTO room ('
