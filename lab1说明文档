@@ -1,0 +1,27 @@
+####
+本次lab使用mysql数据库，使用两个程序csv_to_ms.py和sqlite_to_ms.py分别实现
+将数据从csv文件迁移至mysql数据库和将数据从sqlite轻量级数据库迁移至mysql数据库
+##
+创建表的指令，删除表的指令均存与sql脚本中，由程序读入执行
+sql语句根据程序读入的表结构自行动态构建，实现对数据的灵活处理
+
+## 项目文件夹结构说明
+lab1
+|--clear_db.sql 用于清除数据库的sql脚本
+|--create_table.sql 用于创建表结构的sql脚本
+|--csv_to_ms.py 将数据从csv文件迁移至mysql数据库
+|--sqlite_to_ms.ps 将数据从sqlite迁移至mysql
+|--db_tools.py 包含一些本次项目使用的自定义工具，清除数据库，创建表，连接mysql三个功能
+|--requirements.txt 程序运行的依赖库列表
+|--db.conf 程序内参数配置文件
+
+## 运行方法
+1、使用指令 'virtualenv venv' 建立python3版本虚拟环境
+2、使用指令 'source ./venv/bin/activate'(linux/mac) or '.\venv\Scripts\activate.bat'(windows) 激活虚拟环境
+3、首次运行安装依赖包 'pip install -r requirements.txt'
+4、若已有空白数据库lab1，可运行指令 'python db_tools.py create' 来创建数据表结构
+5、运行指令 'python csv_to_ms.py' 实现将数据从csv文件中转移至mysql数据库中
+6、运行指令 'python db_tools.py clear' 可以清空数据库lab1(删除表), 然后执行 'python db_tools.py create' 创建表结构
+7、运行指令 'python sqlite_to_ms.py' 可以将数据从sqlite中迁移至mysql
+备注：程序使用配置文件 db.conf 有关mysql, sqlite的配置参数如用户名，密码等均在配置文件内存储, 可自行修改
+     另，数据库使用utf-8编码，在该编码下插入内容正常显示，若更换数据库为其他编码，则可能出现乱码请款
